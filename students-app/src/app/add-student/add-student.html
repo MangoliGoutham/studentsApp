@@ -1,0 +1,104 @@
+<section class="add-student-page">
+  <h2>Add Student</h2>
+
+  <form #f="ngForm" (ngSubmit)="onSubmit(f)" novalidate class="student-form">
+    <label class="field">
+      <span class="label">Name *</span>
+      <input
+        name="name"
+        [(ngModel)]="name"
+        #nameCtrl="ngModel"
+        required
+        minlength="5"
+        type="text"
+        class="input"
+        placeholder="Full name"
+      />
+      <div class="error" *ngIf="nameCtrl.invalid && (nameCtrl.dirty || nameCtrl.touched)">
+        <div *ngIf="nameCtrl.errors?.['required']">Name is required.</div>
+        <div *ngIf="nameCtrl.errors?.['minlength']">Minimum 5 characters required.</div>
+      </div>
+    </label>
+
+    <label class="field">
+      <span class="label">Class *</span>
+      <select
+        name="className"
+        [(ngModel)]="className"
+        #classCtrl="ngModel"
+        required
+        class="input"
+      >
+        <option value="" disabled selected>Select class</option>
+        <option *ngFor="let c of classes" [value]="c">{{ c }}</option>
+      </select>
+
+     
+      <div class="class-message" aria-live="polite">
+        <span *ngIf="className === 'Class 9'">
+          You will appear in board exams soon. All the Best !!
+        </span>
+        <span *ngIf="className === 'Class 6'">
+          Welcome to middle school!
+        </span>
+        <span *ngIf="className && className !== 'Class 6' && className !== 'Class 9'">
+          Education and hobby go hand in hand!
+        </span>
+      </div>
+
+      <div class="error" *ngIf="classCtrl.invalid && (classCtrl.dirty || classCtrl.touched)">
+        <div *ngIf="classCtrl.errors?.['required']">Class is required.</div>
+      </div>
+    </label>
+
+    <div class="field">
+      <span class="label">Gender *</span>
+      <label class="radio">
+        <input name="gender" type="radio" [(ngModel)]="gender" value="Male" required /> Male
+      </label>
+      <label class="radio">
+        <input name="gender" type="radio" [(ngModel)]="gender" value="Female" required /> Female
+      </label>
+      <div class="error" *ngIf="(f.submitted || f.controls['gender']?.touched) && !gender">
+        Gender is required.
+      </div>
+    </div>
+
+    <label class="field checkbox-field">
+      <input
+        name="hasHobby"
+        type="checkbox"
+        [(ngModel)]="hasHobby"
+        (change)="onHasHobbyChange()"
+      />
+      <span class="label">Has hobby</span>
+    </label>
+
+    <!-- Hobby shown only when hasHobby is true -->
+    <label class="field" *ngIf="hasHobby">
+      <span class="label">Hobby</span>
+      <input
+        name="hobby"
+        [(ngModel)]="hobby"
+        type="text"
+        class="input"
+        placeholder="Describe hobby (optional)"
+      />
+    </label>
+
+    <label class="field">
+      <span class="label">Favorite Subject</span>
+      <select name="favoriteSubject" [(ngModel)]="favoriteSubject" class="input">
+        <option value="" selected>-- None --</option>
+        <option *ngFor="let s of subjects" [value]="s">{{ s }}</option>
+      </select>
+    </label>
+
+    <div class="actions">
+      <button type="submit" class="btn primary" [disabled]="f.invalid || submitting">
+        {{ submitting ? 'Saving...' : 'Add Student' }}
+      </button>
+      <button type="button" class="btn" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</section>

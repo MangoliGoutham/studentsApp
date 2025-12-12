@@ -1,0 +1,122 @@
+/* Global app layout */
+:root{
+  --bg:#f6f7fb;
+  --sidebar:#2f3b52;
+  --accent:#4caf50;
+  --muted:#6b7280;
+  --card:#ffffff;
+  --shadow: 0 6px 18px rgba(36,41,55,0.08);
+  --radius:8px;
+  --max-width:1200px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:Inter,Segoe UI,Roboto, Arial, sans-serif;background:var(--bg);color:#111}
+a{color:inherit;text-decoration:none}
+
+/* App shell */
+.app-shell,
+.app-container{
+  display:flex;
+  min-height:100vh;
+  gap:24px;
+}
+
+/* Sidebar */
+.sidebar,
+aside.sidebar{
+  width:240px;
+  background:linear-gradient(180deg,var(--sidebar),#24313f);
+  color:#fff;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+  box-shadow: var(--shadow);
+}
+.sidebar .logo h1{font-size:18px;margin:0;font-weight:700}
+.sidebar .menu{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.sidebar .menu-item{
+  display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:6px;color:#eef2f7;font-weight:600;font-size:14px
+}
+.sidebar .menu-item:hover{background:rgba(255,255,255,0.06)}
+.sidebar .menu-item.active,
+.sidebar .menu-item[routerlinkactive]{background:rgba(255,255,255,0.12)}
+
+/* Main content */
+.main-content,
+main.main-content{
+  flex:1;
+  padding:28px;
+  max-width:var(--max-width);
+  margin:0 auto;
+  width:100%;
+}
+
+/* Header row */
+.header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:18px}
+.header-row h2{margin:0;font-size:20px;color:#111}
+
+/* Buttons */
+.btn{
+  border:0;cursor:pointer;border-radius:6px;padding:8px 12px;font-weight:600;
+  background:#efefef;color:#222;box-shadow:none
+}
+.btn.primary,
+.btn-add,
+button.add-student{background:var(--accent);color:white}
+.btn-edit{background:#2196f3;color:#fff}
+.btn-delete{background:#f44336;color:#fff}
+.btn:disabled{opacity:.6;cursor:not-allowed}
+
+/* Students cards layout */
+.students-page .cards,
+.cards-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:16px;
+  margin-top:12px;
+}
+
+.card,
+article.card,
+.student-card{
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:14px;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  min-height:120px;
+}
+
+.card-header{display:flex;justify-content:space-between;align-items:start;gap:8px}
+.student-name,h3.student-name{margin:0;font-size:16px;color:#111}
+.student-class{font-size:13px;color:var(--muted);font-weight:600}
+
+/* Card body rows */
+.card-body .info-row,
+.card-body p{
+  margin:6px 0;font-size:13px;color:#333;
+}
+.card-body .label{color:var(--muted);margin-right:6px;font-weight:600}
+.no-hobby{color:#9aa0a6;font-style:italic}
+
+/* Footer info */
+.footer-info{margin-top:18px;padding:12px;border-left:4px solid var(--accent);background:#f7fff7;color:#18391b;border-radius:6px}
+
+/* Forms (basic global helpers used by add-student) */
+.student-form{max-width:720px;background:var(--card);padding:18px;border-radius:8px;box-shadow:var(--shadow)}
+.field{display:block;margin-bottom:12px}
+.field .label{display:block;margin-bottom:6px;font-weight:600;color:#333}
+.input{width:100%;padding:10px;border:1px solid #e6e9ef;border-radius:6px;background:white}
+.error{color:#d32f2f;font-size:13px;margin-top:6px}
+
+/* Responsive */
+@media (max-width:900px){
+  .sidebar{display:none}
+  .app-shell,.app-container{padding:0}
+  .main-content{padding:18px}
+  .students-page .cards{grid-template-columns:repeat(auto-fill,minmax(220px,1fr))}
+}

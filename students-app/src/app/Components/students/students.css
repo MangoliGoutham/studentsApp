@@ -1,0 +1,205 @@
+:root{
+  --bg: #f6fbff;
+  --panel: linear-gradient(135deg,#ffffff 0%, #f7fbff 100%);
+  --accent: #4f46e5;      /* indigo */
+  --accent-2: #06b6d4;    /* teal */
+  --muted: #6b7280;
+  --card-shadow: 0 8px 20px rgba(79,70,229,0.08);
+  --glass: rgba(255,255,255,0.6);
+  --radius: 14px;
+  --gap: 18px;
+}
+
+/* Page container */
+.students-page{
+  max-width: 1100px;
+  margin: 28px auto;
+  padding: 22px;
+  background: var(--bg);
+  border-radius: 12px;
+  box-shadow: 0 6px 28px rgba(20,24,40,0.05);
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: #111827;
+}
+
+/* Header row */
+.header-row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.header-row h2{
+  margin:0;
+  font-size:22px;
+  letter-spacing: -0.2px;
+  background: linear-gradient(90deg,var(--accent),var(--accent-2));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: black;
+  font-weight: 700;
+
+}
+
+
+
+.btn.add-student{
+  border: none;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: linear-gradient(90deg,var(--accent), #7c3aed);
+  color: #0b0b0b;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(99,102,241,0.18);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.btn.add-student:hover{ transform: translateY(-3px); box-shadow: 0 12px 28px rgba(99,102,241,0.18); }
+.btn.add-student:active{ transform: translateY(-1px); }
+
+
+.no-data{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding: 36px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(6,182,212,0.06), rgba(79,70,229,0.03));
+  color: var(--muted);
+  font-size: 16px;
+  text-align:center;
+  margin: 10px 0 18px;
+  border: 1px dashed rgba(79,70,229,0.08);
+}
+
+
+.cards{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--gap);
+  margin-bottom: 18px;
+}
+
+
+.card{
+  background: var(--panel);
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--card-shadow);
+  border: 1px solid rgba(15,23,42,0.03);
+  transition: transform .2s ease, box-shadow .2s ease;
+  display:flex;
+  flex-direction:column;
+  gap: 10px;
+  min-height: 140px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+.card::before{
+  content: "";
+  position: absolute;
+  right: -40%;
+  top: -40%;
+  width: 160%;
+  height: 160%;
+  background: radial-gradient(circle at 10% 10%, rgba(79,70,229,0.06), transparent 18%),
+              radial-gradient(circle at 90% 90%, rgba(6,182,212,0.04), transparent 22%);
+  transform: rotate(12deg);
+  pointer-events: none;
+}
+
+.card:hover{
+  transform: translateY(-8px);
+  box-shadow: 0 18px 40px rgba(15,23,42,0.09);
+}
+
+
+.card-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 8px;
+}
+
+.student-name{
+  margin:0;
+  font-size:16px;
+  font-weight:700;
+  color:#0f172a;
+}
+
+.student-class{
+  font-size:13px;
+  padding:6px 10px;
+  border-radius:999px;
+  background: linear-gradient(90deg, rgba(79,70,229,0.12), rgba(6,182,212,0.08));
+  color: #0f172a;
+  font-weight:600;
+  white-space:nowrap;
+}
+
+
+.card-body{
+  font-size:14px;
+  color: #374151;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+}
+
+.card-body p{
+  margin:0;
+  line-height:1.3;
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+
+.card-body strong{
+  color:#111827;
+  min-width: 96px;
+  font-weight:600;
+}
+
+
+.footer-info{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:12px;
+  color:var(--muted);
+  font-size:15px;
+  padding-top:6px;
+  border-top: 1px dashed rgba(15,23,42,0.03);
+}
+
+
+@media (max-width:640px){
+  .students-page{ padding:16px; }
+  .header-row{ flex-direction:column; align-items:flex-start; gap:10px; }
+  .btn.add-student{ width: 100%; text-align:center; }
+  .card{ padding:12px; }
+  .student-class{ font-size:12px; padding:5px 8px; }
+  .card-body strong{ min-width: 86px; }
+}
+
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg: #071025;
+    --panel: linear-gradient(180deg,#061226 0%, #071025 100%);
+    --muted: #9ca3af;
+    --card-shadow: 0 10px 30px rgba(2,6,23,0.6);
+    --glass: rgba(255,255,255,0.03);
+  }
+  .students-page{ box-shadow: 0 8px 30px rgba(2,6,23,0.7); color: #e6eef8; }
+  .no-data{ border: 1px dashed rgba(99,102,241,0.12); }
+  .card{ border: 1px solid rgba(255,255,255,0.03); }
+  .student-name, .student-class{ color: #e6eef8; }
+  .card-body{ color: #cbd5e1; }
+}

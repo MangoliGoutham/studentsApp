@@ -1,0 +1,33 @@
+<section class="students-page">
+  <div class="header-row">
+    <h2>Students List</h2>
+    <button class="btn add-student" [routerLink]="['/add-student']">Add Student</button>
+  </div>
+
+  <!-- No Students Message -->
+  <div class="no-data" *ngIf="!SList || SList.length === 0">
+    <p>No students found.</p>
+  </div>
+
+  <!-- Students Cards -->
+  <div class="cards" *ngIf="SList && SList.length > 0">
+    <article class="card" *ngFor="let student of SList">
+      <header class="card-header">
+        <h3 class="student-name">{{ student.Name }}</h3>
+        <span class="student-class">Class {{ student.Class }}</span>
+      </header>
+
+      <div class="card-body">
+        <p><strong>Gender:</strong> {{ student.Gender }}</p>
+        <p><strong>Hobby:</strong> {{ student.Hobby || 'No hobby' }}</p>
+        <p><strong>Favorite Subject:</strong> {{ student.FavouriteSubject || '-' }}</p>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- Total Students Count -->
+  <div class="footer-info" *ngIf="SList && SList.length > 0">
+    <p>Total Students: <strong>{{ SList.length }}</strong></p>
+  </div>
+</section>
